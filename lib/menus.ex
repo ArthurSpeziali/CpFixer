@@ -15,11 +15,6 @@ defmodule App.Menus do
     end
 
 
-    defp cpf(mensage)do
-        IO.puts(mensage)
-        cpf()
-    end
-
     def cpf do
         response = IO.gets("> ")
                    |> String.replace("-", "")
@@ -34,7 +29,9 @@ defmodule App.Menus do
         try do
             String.to_integer(response)
         rescue
-            ArgumentError -> cpf("\nNúmero inválido, tente novamente!\n")
+            ArgumentError -> 
+                IO.puts("\nNúmero inválido, tente novamente!\n")
+                cpf()
         else
            _ -> cpf(:len, response)
         end
@@ -42,7 +39,8 @@ defmodule App.Menus do
 
     defp cpf(:len, response) do
         if String.length(response) != 11 do
-            cpf("\nTamanho do CPF inválido, tente novamente!\n")
+            IO.puts("\nTamanho do CPF inválido, tente novamente!\n")
+            cpf()
         else
             cpf(:dig, response)
         end
@@ -50,9 +48,11 @@ defmodule App.Menus do
 
     defp cpf(:dig, response) do
         if repite_char?(String.codepoints(response)) do
-            cpf("\nTodos os dígitos foram repetidos, tente novamente!\n")
+            IO.puts("\nTodos os dígitos foram repetidos, tente novamente!\n")
+            cpf()
         else
-           IO.puts("\e[2J\e[H")
+            IO.puts("\e[2J\e[H")
+            response
         end
     end
  
