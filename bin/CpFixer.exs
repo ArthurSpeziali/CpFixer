@@ -16,7 +16,7 @@ IO.puts("Digite se deseja validar, minerar ou completar um Cpf: [V/M/C]\n")
 response = App.Menus.main(["v", "m", "c"])
 
 case response do
-    "v" -> IO.puts("V")
+    "v" -> App.Menus.cpf_validate()
     "m" -> IO.puts("M")
     "c" -> IO.puts("C")
 end

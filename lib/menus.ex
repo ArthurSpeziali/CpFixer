@@ -15,44 +15,47 @@ defmodule App.Menus do
     end
 
 
-    def cpf do
+
+    def cpf_ask do
         response = IO.gets("> ")
                    |> String.replace("-", "")
                    |> String.replace(".", "")
                    |> String.replace(" ", "")
                    |> String.trim_trailing("\n")
         
-        cpf(:int, response)
+        cpf_ask(:int, response)
     end
 
-    defp cpf(:int, response) do
+    defp cpf_ask(:int, response) do
         try do
             String.to_integer(response)
         rescue
             ArgumentError -> 
                 IO.puts("\nNúmero inválido, tente novamente!\n")
-                cpf()
+                cpf_ask()
         else
-           _ -> cpf(:len, response)
+           _ -> cpf_ask(:len, response)
         end
     end
 
-    defp cpf(:len, response) do
+    defp cpf_ask(:len, response) do
         if String.length(response) != 11 do
             IO.puts("\nTamanho do CPF inválido, tente novamente!\n")
-            cpf()
+            cpf_ask()
         else
-            cpf(:dig, response)
+            cpf_ask(:dig, response)
         end
     end
 
-    defp cpf(:dig, response) do
+    defp cpf_ask(:dig, response) do
         if repite_char?(String.codepoints(response)) do
             IO.puts("\nTodos os dígitos foram repetidos, tente novamente!\n")
-            cpf()
+            cpf_ask()
         else
             IO.puts("\e[2J\e[H")
-            response
+
+            String.to_integer(response)
+            |> Integer.digits
         end
     end
  
@@ -70,5 +73,34 @@ defmodule App.Menus do
             false
 
         end
+    end
+
+
+
+    def cpf_validate do
+        IO.puts("Digite o CPF:\n")
+
+        cpf = App.Menus.cpf_ask()
+        dv = App.Cpf_Tools.validate(
+            Enum.slice(cpf, 0..-3)
+        )
+
+        if Enum.slice(cpf, -2..-1) == dv do
+            IO.puts("CPF Válido!\n")
+        else
+            IO.puts("CPF Inválido!\n")
+        end
+
+
+        IO.puts("Digite '0' para continuar:")
+        response = IO.gets("> ")
+                   |> String.replace(" ", "")
+                   |> String.trim_trailing("\n")
+        
+        if response == "0" do
+            IO.puts("\e[2J\e[H")
+            cpf_validate()
+        end
+
     end
 end
