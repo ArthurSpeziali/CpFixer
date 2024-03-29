@@ -1,0 +1,4 @@
+- Criar branch "comments", e colocar todos os arquivos comentados (Gerado por I.A)
+- Mudar o bin/CpFixer.exs para deixar com 4 comentarios e chamar a função lib/Main.ex:Main.main
+- Usar o Escript
+- Deixar o ReadMe muito rico!
