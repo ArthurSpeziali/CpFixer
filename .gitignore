@@ -24,3 +24,6 @@ app-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Ignora o txt com todos os CPF's minerados.
+cpf-list.txt
