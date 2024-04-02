@@ -22,5 +22,6 @@ case response do
         App.Menus.cpf_file()
         IO.puts("\e[2J\e[H")
         IO.puts("Todos os CPF's foram escritos em 'cpf-list.txt'!")
+
     "c" -> IO.puts("C")
 end

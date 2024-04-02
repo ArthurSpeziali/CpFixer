@@ -54,4 +54,75 @@ defmodule App.Cpf_Tools do
         miner(list, from + 1, to)
     end
     def miner(list, _from, _to), do: list
+
+
+    def list_repeat(list, char, num \\ 0)
+    def list_repeat([], _char, num), do: num
+
+    def list_repeat([head | tail], char, num) when head == char do
+        list_repeat(tail, char, num + 1)
+    end
+    
+    def list_repeat([_ | tail], char, num) do
+        list_repeat(tail, char, num)
+    end
+
+
+
+    def complete(cpf_str) do
+        num_cpf = String.split(cpf_str, "")
+                 |> Enum.slice(1..-2)
+                 |> list_repeat("?")
+
+        digits = 10 ** num_cpf
+                 |> Integer.to_string
+                 |> String.slice(1..-1)
+
+        limit = 10 ** num_cpf - 1
+                |> Integer.to_string
+
+
+        cpf_list = cpf_str
+                   |> String.split("")
+                   |> Enum.slice(1..-2)
+
+        organize(digits, cpf_list, limit)
+    end
+    
+
+    defp organize(digits, cpf_list, all_list \\ [], limit)
+    defp organize(digits, cpf_list, all_list, limit) when digits != limit do
+        all_list = [
+            organize(
+                cpf_list,
+                String.split(digits, "")
+                |> Enum.slice(1..-2)
+            )
+            | all_list
+        ]
+
+        organize(
+            String.to_integer(digits) + 1
+            |> Integer.to_string
+            |> String.pad_leading(String.length(limit), "0"),
+
+            cpf_list,
+            all_list,
+            limit
+        )
+    end
+    defp organize(_digits, _cpf_list, all_list, _limit), do: all_list
+
+    defp organize(list, [head | tail]) do
+        pos = Enum.find_index(list, &(&1 == "?"))
+        list = List.update_at(
+            list, 
+            pos, 
+            &(&1 = head)
+        )
+
+        organize(list, tail)
+
+    end
+    defp organize(list, []), do: list
 end

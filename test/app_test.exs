@@ -1,7 +1,7 @@
 defmodule AppTest do
     use ExUnit.Case, async: true
     setup do
-        %{cpf_num: 117_795_906_28, cpf_list: [1,1,7,7,9,5,9,0,6]}
+        %{cpf_str: "117.795.906-??", cpf_list: [1,1,7,7,9,5,9,0,6]}
     end
     
     @tag :validate
@@ -15,5 +15,11 @@ defmodule AppTest do
     test "Testando se consigo minerar os CPFs"do
         assert App.Cpf_Tools.miner(10)
             |> Enum.count == 10
+    end
+
+
+    @tag :complete
+    test "Testando completar do programa", %{cpf_str: cpf} do
+        assert App.Cpf_Tools.complete(cpf)
     end
 end
