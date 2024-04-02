@@ -17,6 +17,10 @@ response = App.Menus.main(["v", "m", "c"])
 
 case response do
     "v" -> App.Menus.cpf_validate()
-    "m" -> IO.puts("M")
+    "m" -> 
+        IO.puts("Digite o números de CPF's que deseja minerar:\n")
+        App.Menus.cpf_file()
+        IO.puts("\e[2J\e[H")
+        IO.puts("Todos os CPF's foram escritos em 'cpf-list.exs'!")
     "c" -> IO.puts("C")
 end

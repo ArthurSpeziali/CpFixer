@@ -16,7 +16,7 @@ defmodule App.Menus do
 
 
 
-    def cpf_ask do
+    defp cpf_ask do
         response = IO.gets("> ")
                    |> String.replace("-", "")
                    |> String.replace(".", "")
@@ -61,10 +61,10 @@ defmodule App.Menus do
  
 
 
-    defp repite_char?(list_string, first \\ "*")
+    def repite_char?(list_string, first \\ "*")
 
-    defp repite_char?([], _first), do: true
-    defp repite_char?(list_string, first) do
+    def repite_char?([], _first), do: true
+    def repite_char?(list_string, first) do
         [head | tail] = list_string
 
         if first in ["*" | list_string] do
@@ -80,7 +80,7 @@ defmodule App.Menus do
     def cpf_validate do
         IO.puts("Digite o CPF:\n")
 
-        cpf = App.Menus.cpf_ask()
+        cpf = cpf_ask()
         dv = App.Cpf_Tools.validate(
             Enum.slice(cpf, 0..-3)
         )
@@ -102,5 +102,42 @@ defmodule App.Menus do
             cpf_validate()
         end
 
+    end
+    
+    
+    defp number_ask do
+        number = IO.gets("> ")
+                 |> String.trim_trailing("\n")
+                 |> String.replace("_", "")
+
+        try do
+            String.to_integer(number)
+        rescue
+            ArgumentError ->
+                IO.puts("\nNúmero inválido, tente novamente!\n")
+                number_ask()
+        else
+            _ -> String.to_integer(number)
+        end
+
+    end
+
+
+
+    def cpf_file do
+        number = number_ask()
+        
+        path = "#{__DIR__}/../cpf-list.txt"
+        File.write(path, "")
+
+        for item <- App.Cpf_Tools.miner(number) do
+                    File.write(
+                        path,
+                        Integer.to_string(item) <> "\n",
+                        [:append]
+                    )
+    
+    
+        end
     end
 end
