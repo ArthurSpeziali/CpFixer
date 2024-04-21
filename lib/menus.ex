@@ -1,4 +1,9 @@
 defmodule App.Menus do
+    case :os.type do
+        {:unix, _} -> @path "#{__DIR__}/../cpf-list.txt"
+        {:win32, _} -> @path "#{__DIR__}/../cpf-list.txt"
+    end
+
     def main(list) do
         response = IO.gets("> ")
                    |> String.downcase
@@ -128,12 +133,11 @@ defmodule App.Menus do
     def cpf_file do
         number = number_ask()
         
-        path = "#{__DIR__}/../cpf-list.txt"
-        File.write(path, "")
+        File.write(@path, "")
 
         for item <- App.Cpf_Tools.miner(number) do
                     File.write(
-                        path,
+                        @path,
                         Integer.to_string(item) <> "\n",
                         [:append]
                     )
@@ -187,8 +191,9 @@ defmodule App.Menus do
 
                     "?"
                 )
-
-            IO.puts("CPF's a serem gerados: #{number - 1}")
+            
+            IO.puts("\e[2J\e[H")
+            IO.puts("CPF's a serem gerados: #{number / 100}")
             response
         end
     end
@@ -220,5 +225,26 @@ defmodule App.Menus do
             end
         )
         
+        if length(cpf_list) <= 10 do
+            IO.puts("\e[2J\e[H")
+            IO.puts("Todos os CPF's gerados:\n")
+            
+            for item <- cpf_list do
+                IO.puts("*- #{item}")
+            end
+
+        else
+            File.write(@path, "")
+            for item <- cpf_list do
+                File.write(
+                    @path,
+                    item <> "\n",
+                    [:append]
+                )
+            end
+
+            IO.puts("\e[2J\e[H")
+            IO.puts("Todos os CPF's gerados foram escritos em 'cpf-list.txt'")
+        end
     end
 end

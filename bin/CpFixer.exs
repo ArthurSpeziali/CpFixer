@@ -17,11 +17,14 @@ response = App.Menus.main(["v", "m", "c"])
 
 case response do
     "v" -> App.Menus.cpf_validate()
+
     "m" -> 
         IO.puts("Digite o números de CPF's que deseja minerar:\n")
         App.Menus.cpf_file()
         IO.puts("\e[2J\e[H")
         IO.puts("Todos os CPF's foram escritos em 'cpf-list.txt'!")
 
-    "c" -> IO.puts("C")
+    "c" -> 
+        IO.puts("Digite o CPF incompleto, com as '?' onde está incompleto:\n")
+        App.Menus.cpf_complete()
 end
