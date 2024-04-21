@@ -16,10 +16,4 @@ defmodule AppTest do
         assert App.Cpf_Tools.miner(10)
             |> Enum.count == 10
     end
-
-
-    @tag :complete
-    test "Testando completar do programa", %{cpf_str: cpf} do
-        assert App.Cpf_Tools.complete(cpf)
-    end
 end

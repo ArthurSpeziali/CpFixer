@@ -1,5 +1,6 @@
 # Código feito por ArthurSpeziali
 # https://github.com/ArthurSpeziali
+# Para comentar em todos os arquivos (Usando I.A.), mude para a Branch "commented"
 
 IO.puts("\e[2J\e[H")
 
