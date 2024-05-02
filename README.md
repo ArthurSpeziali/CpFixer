@@ -16,7 +16,7 @@
 #### No terminal, instale o git e de o comando `git clone https://www.github.com/ArthurSpeziali/CpFixer`
 
 ## 2- Certifique de ter o Erlang e Elixir instalado.
-#### Verifique se o Elixir está na versão `>1.14x` e o Erlang `>OTP 24`
+#### Verifique se o Elixir está na versão `1.15.x` e o Erlang `>OTP 24`
 
 ## 3- Inicie o arquivo.
 #### Entre na pasta do projeto, e digite no terminal: `mix compile` e `mix run bin/CpFixer.exs`

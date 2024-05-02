@@ -27,3 +27,6 @@ app-*.tar
 
 # Ignora o txt com todos os CPF's minerados.
 cpf-list.txt
+
+# Ignora o executavel 
+app
