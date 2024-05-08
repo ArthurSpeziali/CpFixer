@@ -40,7 +40,23 @@ defmodule App.Exec do
                 end
 
             "miner" ->
-                true 
+                if length(args) == 1 do
+                    IO.puts("cpfixer: Falta de valor\nTente 'cpfixer help' para mais informações.")
+
+                else
+                    try do
+                        String.to_integer(Enum.at(args, 1))
+                    rescue
+                        ArgumentError ->
+                            write(args, "False")
+                    else
+                        value ->
+                            miner(
+                                args,
+                                App.Cpf_Tools.miner(value)
+                            )
+                    end
+                end
 
             "complete" ->
                 true
@@ -49,7 +65,7 @@ defmodule App.Exec do
         end
     end
 
-    def validate(args, value) do
+    defp validate(args, value) do
         value = String.replace(value, ".", "")
                 |> String.replace("-", "")
                 |> String.split("")
@@ -85,4 +101,11 @@ defmodule App.Exec do
     end
 
     defp write(_args, value), do: IO.puts(value)
+
+
+    def miner(_args, []), do: nil
+    def miner(args, [value | tail]) do
+        write(args, Integer.to_string(value))
+        miner(args, tail)
+    end
 end
