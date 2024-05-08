@@ -105,7 +105,7 @@ defmodule App.Exec do
 
     def miner(_args, []), do: nil
     def miner(args, [value | tail]) do
-        write(args, Integer.to_string(value))
+        write(args, value)
         miner(args, tail)
     end
 end

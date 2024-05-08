@@ -46,8 +46,6 @@ defmodule App.Cpf_Tools do
         list = [
             generate()
             |> Enum.join
-            |> String.to_integer
-
             | list
         ]
 
