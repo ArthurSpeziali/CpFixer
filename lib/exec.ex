@@ -59,7 +59,12 @@ defmodule App.Exec do
                 end
 
             "complete" ->
-                true
+                if length(args) == 1 do
+                    IO.puts("cpfixer: Falta de valor\nTente 'cpfixer help' para mais informações.")
+                else
+                    complete(args, Enum.at(args, 1))
+                end
+               
 
             _ -> IO.puts("cpfixer: Argumento inválido\nTente 'cpfixer help' para mais informações.")
         end
@@ -107,5 +112,50 @@ defmodule App.Exec do
     def miner(args, [value | tail]) do
         write(args, value)
         miner(args, tail)
+    end
+
+
+    def complete(args, value) do
+        if String.contains?(value, "?") do
+            try do
+                String.replace(value, "?", "")
+                |> String.to_integer
+
+            rescue
+                ArgumentError ->
+                    write(args, "False")
+            else
+                _ ->
+                    list_cpf = App.Cpf_Tools.complete(
+                        value
+                    )
+                    
+                    int_list = for item <- list_cpf do
+                        Enum.join(item)
+                    end
+                
+                    cpf_list = Enum.filter(
+                        int_list,
+                        fn
+                            (value) ->
+                                App.Cpf_Tools.validate(
+                                    String.split(value, "")
+                                    |> Enum.slice(1..-2)
+                                    |> Enum.slice(0..-3)
+                                    |> Enum.map(&(String.to_integer(&1)))
+                                
+                                ) == String.split(value, "")
+                                    |> Enum.slice(1..-2)
+                                    |> Enum.slice(-2..-1)
+                                    |> Enum.map(&(String.to_integer(&1)))
+                        end
+                    )
+                    for item <- cpf_list do
+                        write(args, item)
+                    end
+            end
+        else
+            write(args, "False")
+        end
     end
 end

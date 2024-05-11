@@ -138,7 +138,7 @@ defmodule App.Menus do
         for item <- App.Cpf_Tools.miner(number) do
                     File.write(
                         @path,
-                        Integer.to_string(item) <> "\n",
+                        item <> "\n",
                         [:append]
                     )
         end
@@ -199,9 +199,9 @@ defmodule App.Menus do
     end
 
 
-    def cpf_complete do
+    def cpf_complete(cpf_mark) do
         list_cpf = App.Cpf_Tools.complete(
-            mark_ask()
+            cpf_mark
         )
         
         int_list = for item <- list_cpf do

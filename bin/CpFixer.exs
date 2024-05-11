@@ -28,5 +28,5 @@ case response do
 
     "c" -> 
         IO.puts("Digite o CPF incompleto, com as '?' onde está incompleto:\n")
-        App.Menus.cpf_complete()
+        App.Menus.cpf_complete(App.Menus.mark_ask)
 end
