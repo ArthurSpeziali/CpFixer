@@ -11,10 +11,10 @@ defmodule App.Exec do
         complete -> Gera todas as possibilidades de auto-completar o valor recebido como CPF.
     
     Ajuda:
-        "Como acesso o cpfixer fora da pasta '.cpfixer'?" -> Mova o 'cpfixer' para a pasta do seu $PATH.
         "Posso colocar 'acentuação' no número do CPF?" -> O executável ignora os carácteres: "." e "-".
         "Onde fica os outros arquivos para o executavel funcionar?" -> Na pasta ".cpfixer", dentro da sua pasta $HOME
         "Quero colocar a saída do arquivo em um arquivo, como faço?" -> Adicione no comando o arquivo, Ex: `cpfixer miner 1000 /diretorio/para/o/arquivo.txt`.
+        "Eu digitei 'cpfixer update' mas ele não atualizou." -> Depois disto, dê o comando: "sudo mv ~/.cpfixer/app /usr/bin/cpfixer"
     """
 
 
