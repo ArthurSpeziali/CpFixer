@@ -39,3 +39,15 @@ echo ". $HOME/.asdf/completions/asdf.bash" >> $HOME/.bashrc
 #### Exporte a versão
 `asdf global elixir version`
 
+
+## Executável (Escript)
+
+### No Linux:
+#### De permisões ao script de instalação na pasta do projeto
+`chmod a+x update.sh`
+
+#### Execute o script na pasta do projeto
+`./update.sh`
+
+#### Mova para o executavel para o $PATH
+`sudo mv $HOME/.cpfixer/app /usr/bin/cpfixer`

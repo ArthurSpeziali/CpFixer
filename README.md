@@ -25,4 +25,4 @@
 
 ### Depure o projeto: `iex -S mix`
 ### Teste as funções: Edite o arquivo `test/app_test.exs` e depois digite `mix test`
-### Executável (Escript): Comming Soon!
+### Executável (Escript): `./update.sh` (Olhe o INSTALL.md para mais informações)
