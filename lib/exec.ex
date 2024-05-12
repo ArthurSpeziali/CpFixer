@@ -1,4 +1,6 @@
 defmodule App.Exec do
+    @home System.user_home
+
     @hep_msg """
     Como usar:
         cpfixer [argumento] {valor} (arquivo de saída)
@@ -17,6 +19,8 @@ defmodule App.Exec do
     """
 
 
+    if File.exists?("#{@home}/.cpfixer/cpf_tools.ex"), do: Code.require_file("#{@home}/.cpfixer/cpf_tools.ex")
+
     def main([]) do
         IO.puts("cpfixer: Falta de argumento\nTente 'cpfixer help' para mais informações.")
     end
@@ -28,6 +32,20 @@ defmodule App.Exec do
 
             "update" ->
                 IO.puts("Atualizando com o GIT.")
+                System.cmd("mkdir", ["-p", "#{@home}/.cpfixer"])
+                System.cmd("rm", ["-rf", "#{@home}/.cpfixer"])
+
+                System.cmd(
+                    "git",
+                    [
+                        "clone",
+                        "-b",
+                        "exec",
+                        "https://github.com/ArthurSpeziali/CpFixer",
+                        "#{@home}/.cpfixer"
+                    ]
+                )
+
 
             "validate" ->
                 if length(args) == 1 do
