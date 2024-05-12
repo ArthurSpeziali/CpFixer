@@ -27,7 +27,7 @@ defmodule App.Exec do
                 IO.puts(@hep_msg)
 
             "update" ->
-                IO.puts("Executável já atualizado!")
+                IO.puts("Atualizando com o GIT.")
 
             "validate" ->
                 if length(args) == 1 do
