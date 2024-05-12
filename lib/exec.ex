@@ -5,14 +5,14 @@ defmodule App.Exec do
 
     Argumentos:
         help -> Exibe esta tela de ajuda {Não recebe valor}.
-        update -> Atualiza o executavel usando o git + mix {Não recebe valor}.
+        update -> Atualiza o executavel usando o git + escript {Não recebe valor}.
         validate -> Valida se o valor recbido é um CPF válido, retorna "True" ou "False".
         miner -> Gera o número do valor recebido em CPF's aleatórios.
         complete -> Gera todas as possibilidades de auto-completar o valor recebido como CPF.
     
     Ajuda:
         "Posso colocar 'acentuação' no número do CPF?" -> O executável ignora os carácteres: "." e "-".
-        "Como acesso o executável de qualquer lugar?" -> Mova este executavel ao $PATH do seu sistema.
+        "Onde fica os outros arquivos para o executavel funcionar?" -> Na pasta ".cpfixer", dentro da sua pasta $HOME
         "Quero colocar a saída do arquivo em um arquivo, como faço?" -> Adicione no comando o arquivo, Ex: `cpfixer miner 1000 /diretorio/para/o/arquivo.txt`.
     """
 
