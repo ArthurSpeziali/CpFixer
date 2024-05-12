@@ -1,6 +1,4 @@
 defmodule App.Exec do
-    @home System.user_home
-
     @hep_msg """
     Como usar:
         cpfixer [argumento] {valor} (arquivo de saída)
@@ -13,13 +11,13 @@ defmodule App.Exec do
         complete -> Gera todas as possibilidades de auto-completar o valor recebido como CPF.
     
     Ajuda:
+        "Como acesso o cpfixer fora da pasta '.cpfixer'?" -> Mova o 'cpfixer' para a pasta do seu $PATH.
         "Posso colocar 'acentuação' no número do CPF?" -> O executável ignora os carácteres: "." e "-".
         "Onde fica os outros arquivos para o executavel funcionar?" -> Na pasta ".cpfixer", dentro da sua pasta $HOME
         "Quero colocar a saída do arquivo em um arquivo, como faço?" -> Adicione no comando o arquivo, Ex: `cpfixer miner 1000 /diretorio/para/o/arquivo.txt`.
     """
 
 
-    if File.exists?("#{@home}/.cpfixer/cpf_tools.ex"), do: Code.require_file("#{@home}/.cpfixer/cpf_tools.ex")
 
     def main([]) do
         IO.puts("cpfixer: Falta de argumento\nTente 'cpfixer help' para mais informações.")
@@ -31,21 +29,8 @@ defmodule App.Exec do
                 IO.puts(@hep_msg)
 
             "update" ->
-                IO.puts("Atualizando com o GIT.")
-                System.cmd("mkdir", ["-p", "#{@home}/.cpfixer"])
-                System.cmd("rm", ["-rf", "#{@home}/.cpfixer"])
-
-                System.cmd(
-                    "git",
-                    [
-                        "clone",
-                        "-b",
-                        "exec",
-                        "https://github.com/ArthurSpeziali/CpFixer",
-                        "#{@home}/.cpfixer"
-                    ]
-                )
-
+                IO.puts("Atualizando com o GIT.\n")
+                System.shell("./update.sh")
 
             "validate" ->
                 if length(args) == 1 do
