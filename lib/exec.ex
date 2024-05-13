@@ -30,7 +30,7 @@ defmodule App.Exec do
 
             "update" ->
                 IO.puts("Atualizando com o GIT.\n")
-                System.shell("./update.sh")
+                System.shell("#{System.user_home}/.cpfixer/update.sh")
 
             "validate" ->
                 if length(args) == 1 do
