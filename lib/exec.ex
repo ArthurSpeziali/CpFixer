@@ -8,7 +8,7 @@ defmodule App.Exec do
         update -> Atualiza o executavel usando o git + escript {Não recebe valor}.
         validate -> Valida se o valor recbido é um CPF válido, retorna "True" ou "False".
         miner -> Gera o número do valor recebido em CPF's aleatórios.
-        complete -> Gera todas as possibilidades de auto-completar o valor recebido como CPF.
+        complete -> Gera todas as possibilidades de auto-completar o valor recebido substituindo os caracteres "?".
     
     Ajuda:
         "Posso colocar 'acentuação' no número do CPF?" -> O executável ignora os carácteres: "." e "-".
