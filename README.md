@@ -21,8 +21,10 @@
 ## 3- Inicie o arquivo.
 #### Entre na pasta do projeto, e digite no terminal: `mix compile` e `mix run bin/CpFixer.exs`
 
+<br><br><br><br>
+
 ## Utilitários:
 
 ### Depure o projeto: `iex -S mix`
 ### Teste as funções: Edite o arquivo `test/app_test.exs` e depois digite `mix test`
-### Executável (Escript): `./update.sh` (Olhe o INSTALL.md para mais informações)
+### Executável (Escript): Leia o `INSTALL.md`
