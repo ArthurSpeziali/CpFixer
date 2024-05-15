@@ -5,7 +5,7 @@
 ---
 
 <br><br>
-### Para a instalação do Erlang e Elixir, leia o INSTALL.md<br><br>O Programa em CLI necessita do Erlang e do Elixir, enquanto o Executável só precisa do Erlang (Escript)
+### Para a instalação do Erlang e Elixir, leia o INSTALL.md<br><br>O Programa com interface necessita do Erlang e do Elixir, enquanto o Executável só precisa do Erlang (Escript)
 <br><br><br>
 
 ## 1- Clone o repositório.
